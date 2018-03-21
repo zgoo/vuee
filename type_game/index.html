@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="css/flat-ui-pro.min.css">
+  <title>Web Type Game</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+  <label for="user-input"></label>
+  <input type="text" id="user-input" @keydown="checkUserKeyDown($event)"
+         @keyup="checkUserKeyUp($event)">
+
+  <hr>
+  <input type="button" value="left" class="btn btn-xs"
+         :class="{'btn-success': active.ArrowLeft}">
+  <input type="button" value="right" class="btn btn-xs"
+         :class="{'btn-success': active.ArrowRight}">
+  <input type="button" value="Enter" class="btn btn-xs"
+         :class="{'btn-success': active.Enter}">
+</div>
+
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            active: {
+                ArrowLeft: false,
+                ArrowRight: false,
+                Enter: false
+            }
+        },
+        methods: {
+            checkUserKeyDown: function (event) {
+                this.$set(this.active, event.key, true)
+            },
+            checkUserKeyUp: function (event) {
+                this.$set(this.active, event.key, false)
+            }
+        }
+    });
+</script>
+</body>
+</html>
