@@ -20,7 +20,8 @@
       <div class="input-group-prepend">
         <span class="input-group-text font-weight-bold">Type Here</span>
       </div>
-      <textarea class="form-control text-success" aria-label="Type Here" rows="4" v-model="userInput"
+      <textarea class="form-control text-success" aria-label="Type Here"
+                rows="4" v-model="userInput"
                 @keydown.stop="checkUserKeyDown($event)"
                 @keyup.stop="checkUserKeyUp($event)"></textarea>
     </div>
@@ -29,7 +30,8 @@
         <div class="input-group-prepend">
           <span class="input-group-text font-weight-bold">Count</span>
         </div>
-        <input class="form-control text-success" aria-label="Count" v-model="totalInput">
+        <input class="form-control text-success" aria-label="Count"
+               v-model="totalInput">
         <div class="input-group-append">
           <span class="input-group-text">chars</span>
         </div>
@@ -38,13 +40,15 @@
         <div class="input-group-prepend">
           <span class="input-group-text start font-weight-bold">Start</span>
         </div>
-        <input class="form-control text-success" aria-label="Start" v-model="formatStartTime">
+        <input class="form-control text-success" aria-label="Start"
+               v-model="formatStartTime">
       </div>
       <div class="input-group">
         <div class="input-group-prepend">
           <span class="input-group-text used font-weight-bold">Used</span>
         </div>
-        <input class="form-control text-success" aria-label="Used" v-model="usedTime">
+        <input class="form-control text-success" aria-label="Used"
+               v-model="usedTime">
         <div class="input-group-append">
           <span class="input-group-text used-mm">mm</span>
         </div>
@@ -56,141 +60,28 @@
 
   <div class="keyboard row d-flex justify-content-between">
     <!-- ~ to backspace -->
-    <input type="button" value="~ `" class="btn btn-lg m-1"
-           :class="{'btn-success': active.Tilde || active.Grave}">
-    <input type="button" value="1 !" class="btn btn-lg m-1"
-           :class="{'btn-success': active.One || active.Exclamation}">
-    <input type="button" value="2 @" class="btn btn-lg m-1"
-           :class="{'btn-success': active.Two || active.AtSign}">
-    <input type="button" value="3 #" class="btn btn-lg m-1"
-           :class="{'btn-success': active.Three  || active.Number}">
-    <input type="button" value="4 $" class="btn btn-lg m-1"
-           :class="{'btn-success': active.Four || active.Dollar}">
-    <input type="button" value="5 %" class="btn btn-lg m-1"
-           :class="{'btn-success': active.Five || active.Percent}">
-    <input type="button" value="6 ^" class="btn btn-lg m-1"
-           :class="{'btn-success': active.Six || active.Caret}">
-    <input type="button" value="7 &" class="btn btn-lg m-1"
-           :class="{'btn-success': active.Seven || active.Ampersand}">
-    <input type="button" value="8 *" class="btn btn-lg m-1"
-           :class="{'btn-success': active.Eight || active.Asterisk}">
-    <input type="button" value="9 (" class="btn btn-lg m-1"
-           :class="{'btn-success': active.Nine || active.LeftParenthesis}">
-    <input type="button" value="0 )" class="btn btn-lg m-1"
-           :class="{'btn-success': active.Zero || active.RightParenthesis}">
-    <input type="button" value="- _" class="btn btn-lg m-1"
-           :class="{'btn-success': active.Minus || active.Underscore}">
-    <input type="button" value="+ =" class="btn btn-lg m-1"
-           :class="{'btn-success': active.Plus || active.EqualitySign}">
-    <input type="button" value="Delete" class="btn btn-lg m-1"
-           :class="{'btn-success': active.Backspace}">
+    <input type="button" v-for="key in tildeToDelete"
+           :value="key.value" :class="key.cls" :id="key.id">
 
     <div class="w-100"></div>
     <!-- tab to |\-->
-    <input type="button" value="Tab" class="btn btn-lg m-1 px-4"
-           :class="{'btn-success': active.Tab}">
-    <input type="button" value="Q q" class="btn btn-lg m-1"
-           :class="{'btn-success': active.q || active.Q}">
-    <input type="button" value="W w" class="btn btn-lg m-1"
-           :class="{'btn-success': active.w || active.W}">
-    <input type="button" value="E e" class="btn btn-lg m-1"
-           :class="{'btn-success': active.e || active.E}">
-    <input type="button" value="R r" class="btn btn-lg m-1"
-           :class="{'btn-success': active.r || active.R}">
-    <input type="button" value="T t" class="btn btn-lg m-1"
-           :class="{'btn-success': active.t || active.T}">
-    <input type="button" value="Y y" class="btn btn-lg m-1"
-           :class="{'btn-success': active.y || active.Y}">
-    <input type="button" value="U u" class="btn btn-lg m-1"
-           :class="{'btn-success': active.u || active.U}">
-    <input type="button" value="I i" class="btn btn-lg m-1"
-           :class="{'btn-success': active.i || active.I}">
-    <input type="button" value="O o" class="btn btn-lg m-1"
-           :class="{'btn-success': active.o || active.O}">
-    <input type="button" value="P p" class="btn btn-lg m-1"
-           :class="{'btn-success': active.p || active.P}">
-    <input type="button" value="{ [" class="btn btn-lg m-1"
-           :class="{'btn-success': active.LeftSquareBracket || active.LeftCurlyBracket}">
-    <input type="button" value="} ]" class="btn btn-lg m-1"
-           :class="{'btn-success': active.RightSquareBracket || active.RightCurlyBracket}">
-    <input type="button" value="| \" class="btn btn-lg m-1"
-           :class="{'btn-success': active.VertialBar || active.Backslash}">
+    <input type="button" v-for="key in tabToBackslash"
+           :value="key.value" :class="key.cls" :id="key.id">
 
     <div class="w-100"></div>
-    <!-- CapLock to Enter -->
-    <input type="button" value="Caps Lock" class="btn btn-lg m-1 px-3"
-           :class="{'btn-success': active.CapsLock}">
-    <input type="button" value="A a" class="btn btn-lg m-1"
-           :class="{'btn-success': active.a || active.A}">
-    <input type="button" value="S s" class="btn btn-lg m-1"
-           :class="{'btn-success': active.s || active.S}">
-    <input type="button" value="D d" class="btn btn-lg m-1"
-           :class="{'btn-success': active.d || active.D}">
-    <input type="button" value="F f" class="btn btn-lg m-1"
-           :class="{'btn-success': active.f || active.F}">
-    <input type="button" value="G g" class="btn btn-lg m-1"
-           :class="{'btn-success': active.g || active.G}">
-    <input type="button" value="H h" class="btn btn-lg m-1"
-           :class="{'btn-success': active.h || active.H}">
-    <input type="button" value="J j" class="btn btn-lg m-1"
-           :class="{'btn-success': active.j || active.J}">
-    <input type="button" value="K k" class="btn btn-lg m-1"
-           :class="{'btn-success': active.k || active.K}">
-    <input type="button" value="L l" class="btn btn-lg m-1"
-           :class="{'btn-success': active.l || active.L}">
-    <input type="button" value=": ;" class="btn btn-lg m-1"
-           :class="{'btn-success': active.Colon || active.Semicolon}">
-    <input type="button" value="&quot; '" class="btn btn-lg m-1"
-           :class="{'btn-success': active.DoubleQuote || active.SingleQuote}">
-    <input type="button" value="Enter" class="btn btn-lg m-1 px-4"
-           :class="{'btn-success': active.Enter}">
+    <!-- CapsLock to Enter -->
+    <input type="button" v-for="key in capsLockToEnter"
+           :value="key.value" :class="key.cls" :id="key.id">
 
     <div class="w-100"></div>
     <!-- Shift to Shift-->
-    <input type="button" value="Shift" class="btn btn-lg m-1 px-5"
-           :class="{'btn-success': active.Shift}">
-    <input type="button" value="Z z" class="btn btn-lg m-1"
-           :class="{'btn-success': active.z || active.Z}">
-    <input type="button" value="X x" class="btn btn-lg m-1"
-           :class="{'btn-success': active.x || active.X}">
-    <input type="button" value="C c" class="btn btn-lg m-1"
-           :class="{'btn-success': active.c || active.C}">
-    <input type="button" value="V v" class="btn btn-lg m-1"
-           :class="{'btn-success': active.v || active.V}">
-    <input type="button" value="B b" class="btn btn-lg m-1"
-           :class="{'btn-success': active.b || active.B}">
-    <input type="button" value="N n" class="btn btn-lg m-1"
-           :class="{'btn-success': active.n || active.N}">
-    <input type="button" value="M m" class="btn btn-lg m-1"
-           :class="{'btn-success': active.m || active.M}">
-    <input type="button" value="< ," class="btn btn-lg m-1"
-           :class="{'btn-success': active.LessThan || active.Comma}">
-    <input type="button" value="> ." class="btn btn-lg m-1"
-           :class="{'btn-success': active.GreaterThan || active.Period}">
-    <input type="button" value="? /" class="btn btn-lg m-1"
-           :class="{'btn-success': active.QuestionMark || active.Slash}">
-    <input type="button" value="Shift" class="btn btn-lg m-1 px-5"
-           :class="{'btn-success': active.Shift}">
-
+    <input type="button" v-for="key in shiftToShift"
+           :value="key.value" :class="key.cls" :id="key.id">
 
     <div class="w-100"></div>
     <!-- ctrl to ctrl -->
-    <input type="button" value="Ctrl" class="btn btn-lg m-1 px-4"
-           :class="{'btn-success': active.Control}">
-    <input type="button" value="⊞" class="btn btn-lg m-1"
-           :class="{'btn-success': active.Meta}">
-    <input type="button" value="Alt" class="btn btn-lg m-1"
-           :class="{'btn-success': active.Alt}">
-    <input type="button" value="Space" class="btn btn-lg m-1 w-50"
-           :class="{'btn-success': active.Space}">
-    <input type="button" value="Alt" class="btn btn-lg m-1"
-           :class="{'btn-success': active.Alt}">
-    <input type="button" value="⊞" class="btn btn-lg m-1"
-           :class="{'btn-success': active.Meta}">
-    <input type="button" value="▤" class="btn btn-lg m-1"
-           :class="{'btn-success': active.ContextMenu}">
-    <input type="button" value="Ctrl" class="btn btn-lg m-1 px-4"
-           :class="{'btn-success': active.Control}">
+    <input type="button" v-for="key in ctrlToCtrl"
+           :value="key.value" :class="key.cls" :id="key.id">
   </div>
 
 </div>
