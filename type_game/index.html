@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/app.css">
   <!--<link rel="stylesheet" href="css/flat-ui-pro.min.css">-->
   <title>Web Type Game</title>
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
@@ -15,20 +16,45 @@
 </nav>
 <div class="container mt-4" id="app">
   <div class="row">
-    <div class="input-group">
+    <div class="input-group col-8 pl-0">
       <div class="input-group-prepend">
-        <span class="input-group-text">Type Here</span>
+        <span class="input-group-text font-weight-bold">Type Here</span>
       </div>
-      <textarea class="form-control" aria-label="Type Here" rows="4"
+      <textarea class="form-control text-success" aria-label="Type Here" rows="4" v-model="userInput"
                 @keydown.stop="checkUserKeyDown($event)"
                 @keyup.stop="checkUserKeyUp($event)"></textarea>
+    </div>
+    <div class="col-4 pr-0">
+      <div class="input-group mb-1">
+        <div class="input-group-prepend">
+          <span class="input-group-text font-weight-bold">Count</span>
+        </div>
+        <input class="form-control text-success" aria-label="Count" v-model="totalInput">
+        <div class="input-group-append">
+          <span class="input-group-text">chars</span>
+        </div>
+      </div>
+      <div class="input-group mb-1">
+        <div class="input-group-prepend">
+          <span class="input-group-text start font-weight-bold">Start</span>
+        </div>
+        <input class="form-control text-success" aria-label="Start" v-model="formatStartTime">
+      </div>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text used font-weight-bold">Used</span>
+        </div>
+        <input class="form-control text-success" aria-label="Used" v-model="usedTime">
+        <div class="input-group-append">
+          <span class="input-group-text used-mm">mm</span>
+        </div>
+      </div>
     </div>
   </div>
 
   <div class="w-100 mt-5"></div>
 
-  <div class="row d-flex justify-content-between"
-       style="border: 0.5em solid whitesmoke; border-radius: 0.5em; box-shadow: 3px 4px 4px 2px;">
+  <div class="keyboard row d-flex justify-content-between">
     <!-- ~ to backspace -->
     <input type="button" value="~ `" class="btn btn-lg m-1"
            :class="{'btn-success': active.Tilde || active.Grave}">
@@ -54,7 +80,7 @@
            :class="{'btn-success': active.Zero || active.RightParenthesis}">
     <input type="button" value="- _" class="btn btn-lg m-1"
            :class="{'btn-success': active.Minus || active.Underscore}">
-    <input type="button" value="= +" class="btn btn-lg m-1"
+    <input type="button" value="+ =" class="btn btn-lg m-1"
            :class="{'btn-success': active.Plus || active.EqualitySign}">
     <input type="button" value="Delete" class="btn btn-lg m-1"
            :class="{'btn-success': active.Backspace}">

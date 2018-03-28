@@ -1,0 +1,17 @@
+.keyboard {
+    border: 0.5em solid whitesmoke;
+    border-bottom: 0.3em solid whitesmoke;
+    border-radius: 0.5em;
+    box-shadow: 0 -2px 4px 2px;
+}
+
+.start {
+    padding-right: 21px;
+}
+
+.used {
+    padding-right: 20px;
+}
+.used-mm {
+    padding-left: 22px
+}
